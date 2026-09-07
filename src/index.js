@@ -1,2 +1,8 @@
+import todoManager from './todoManager.js';
+import { render } from './dom/render.js';
 
-console.log("Todo List başlıyor...");
+todoManager.init();
+render();
+
+window.addEventListener("app:render", render);
+

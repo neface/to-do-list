@@ -1,5 +1,5 @@
-export class ToDo {
-    constructor(title, description, dueDate, priority, notes = "", completed = false) {
+export class Todo {
+    constructor({title, description, dueDate, priority, notes = "", completed = false}) {
         this.id = crypto.randomUUID();
         this.title = title;
         this.description = description;

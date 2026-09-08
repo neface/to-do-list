@@ -1,6 +1,28 @@
 import todoManager from "../todoManager";
+import { format, isToday, isTomorrow, isPast, differenceInCalendarDays } from "date-fns";
 
 let expandedTodoId = null;
+
+function formatDueDate(dueDate) {
+    if (!dueDate) return "No due date";
+    
+    const date = new Date(dueDate);
+
+    if (isToday(date)) return "Today";
+    if (isTomorrow(date)) return "Tomorrow";
+
+    const daysDifference = differenceInCalendarDays(date, new Date());
+
+    if (isPast(date)) {
+        return `${Math.abs(daysDifference)} day(s) ago`;
+    }
+
+    if (daysDifference <= 7) {
+        return `${daysDifference} day(s) left`;
+    }
+
+    return format(date, "MMM dd, yyyy");
+}
 
 export function renderTodoList(activeProject) {
     const container = document.createElement("div");
@@ -21,6 +43,9 @@ export function renderTodoList(activeProject) {
         const item = document.createElement("li");
         item.classList.add("todo-item", `priority-${todo.priority}`);
 
+        const row = document.createElement("div");
+        row.classList.add("todo-row");
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = todo.completed;
@@ -30,7 +55,7 @@ export function renderTodoList(activeProject) {
         });
 
         const label = document.createElement("span");
-        label.textContent = `${todo.title} - Due: ${todo.dueDate} - Priority: ${todo.priority}`;
+        label.textContent = `${todo.title} - Due: ${formatDueDate(todo.dueDate)} - Priority: ${todo.priority}`;
         if (todo.completed) {
             label.style.textDecoration = "line-through";
         }
@@ -47,13 +72,13 @@ export function renderTodoList(activeProject) {
             window.dispatchEvent(new Event("app:render"));
         });
 
-        item.append(checkbox);
-        item.append(label);
-        item.append(deleteButton);
-        list.appendChild(item);
+        row.append(checkbox);
+        row.append(label);
+        row.append(deleteButton);
+        item.appendChild(row);
 
         if (expandedTodoId === todo.id) {
-        container.appendChild(createDetailPanel(activeProject, todo));
+            item.appendChild(createDetailPanel(activeProject, todo));
         }
 
         list.appendChild(item);

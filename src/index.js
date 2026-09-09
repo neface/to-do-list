@@ -1,3 +1,4 @@
+import './style.css';
 import todoManager from './todoManager.js';
 import { render } from './dom/render.js';
 

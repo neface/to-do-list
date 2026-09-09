@@ -12,7 +12,6 @@ export function renderProjectList(projects, activeProject) {
 
     projects.forEach(project => {
         const listItem = document.createElement("li");
-        listItem.textContent = project.name;
         listItem.dataset.projectId = project.id;
         listItem.classList.add("project-item");
 
@@ -20,11 +19,25 @@ export function renderProjectList(projects, activeProject) {
             listItem.classList.add("active");
         }
 
-        listItem.addEventListener("click", () => {
+        const name = document.createElement("span");
+        name.textContent = project.name;
+        name.classList.add("project-name");
+        name.style.cursor = "pointer";
+        name.addEventListener("click", () => {
             todoManager.setActiveProject(project.id);
             window.dispatchEvent(new Event("app:render"));
         });
 
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("delete-project-button");
+        deleteButton.addEventListener("click", (event) => {
+            todoManager.removeProject(project.id);
+            window.dispatchEvent(new Event("app:render"));
+        });
+
+        listItem.appendChild(name);
+        listItem.appendChild(deleteButton);
         list.appendChild(listItem);
     });
 

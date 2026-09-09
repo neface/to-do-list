@@ -59,6 +59,10 @@ function setActiveProject(projectId) {
 function addProject(name) {
     const project = new Project({ name });
     projects.push(project);
+
+    if (activeProjectId === null) {
+        activeProjectId = project.id;
+    }
     save();
 }
 

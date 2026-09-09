@@ -1,0 +1,192 @@
+/* To Do List - styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 30px 20px;
+}
+
+#app {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* left side (projects) */
+.project-list {
+  width: 220px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+/* right side (todos) */
+.todo-list {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+ul {
+  list-style: none;
+}
+
+/* project items */
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.project-item:hover {
+  background-color: #f0f0f0;
+}
+
+.project-item.active {
+  background-color: #e6eeff;
+}
+
+/* the project name is clickable, the button stays on the right */
+.project-name {
+  flex: 1;
+  cursor: pointer;
+  overflow-wrap: break-word;
+}
+
+.project-item.active .project-name {
+  font-weight: bold;
+}
+
+.delete-project-button {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #cc4d4d;
+}
+
+.delete-project-button:hover {
+  background-color: #a83c3c;
+}
+
+/* todo items */
+.todo-item {
+  border: 1px solid #eee;
+  border-left: 4px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+/* the color on the left shows the priority */
+.priority-low {
+  border-left-color: #6ba368;
+}
+
+.priority-medium {
+  border-left-color: #d9a441;
+}
+
+.priority-high {
+  border-left-color: #cc4d4d;
+}
+
+.todo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-row span {
+  flex: 1;
+}
+
+.todo-detail-panel {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #ddd;
+}
+
+/* forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+textarea {
+  height: 60px;
+  resize: vertical;
+}
+
+button {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 7px 12px;
+  color: #fff;
+  background-color: #4a76c7;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3a5fa0;
+}
+
+/* delete button next to a todo */
+.todo-row button {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #cc4d4d;
+}
+
+.todo-row button:hover {
+  background-color: #a83c3c;
+}
+
+/* small screens */
+@media (max-width: 600px) {
+  #app {
+    flex-direction: column;
+  }
+
+  .project-list {
+    width: 100%;
+  }
+}

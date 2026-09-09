@@ -1,9 +1,9 @@
 export class Project {
-    constructor(name, description = "", todos = []) {
-        this.id = crypto.randomUUID();
+    constructor({name, description = "", todos = [], id = null}) {
         this.name = name;
         this.description = description;
         this.todos = todos;
+        this.id = id ?? crypto.randomUUID();
     }
 
     addTodo(todo) {
